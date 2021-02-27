@@ -14,13 +14,6 @@ class MovieListRepositoryImpl(): MovieListRepository {
     private var listener: MovieListContract.MovieListListerner? = null
 
 
-     private fun getDisposable() = disposable
-
-    fun attachListener(listenerx: MovieListContract.MovieListListerner){
-        listener = listenerx
-    }
-
-
     override fun getListMovies(page: Int) {
         getDisposable().add(retrofit.apiServiceMovie().getMoviesTOP(ApiService.TOKEN_API,page).
         observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
@@ -40,6 +33,14 @@ class MovieListRepositoryImpl(): MovieListRepository {
 
     override fun disposableInstance() {
         getDisposable().clear()
+    }
+
+    override fun <T> attachListener(t: T) {
+        listener = t as MovieListContract.MovieListListerner
+    }
+
+    override fun getDisposable(): CompositeDisposable {
+        return disposable
     }
 
 }

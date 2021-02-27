@@ -19,7 +19,6 @@ class RetrofitInitializer {
 
 
     private fun createHttpLogginInterceptor(): OkHttpClient{
-
         val httpInterceptor = HttpLoggingInterceptor()
         httpInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return OkHttpClient.Builder().addInterceptor(httpInterceptor).build()

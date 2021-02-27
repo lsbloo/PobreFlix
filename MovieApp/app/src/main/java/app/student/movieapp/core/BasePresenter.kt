@@ -10,4 +10,6 @@ interface BasePresenter {
     fun <T: Any> onResponseOnErrorNetwork(clazz: KClass<T>)
 
     fun <T> onResponseOnErrorNetwork(t: T)
+
+    fun onDisposable()
 }

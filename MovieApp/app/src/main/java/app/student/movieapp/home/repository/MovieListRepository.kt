@@ -1,10 +1,11 @@
 package app.student.movieapp.repository
 
+import app.student.movieapp.core.BaseRepository
 import app.student.movieapp.model.ListMovies
 import io.reactivex.Observable
 import retrofit2.Response
 
-interface MovieListRepository {
+interface MovieListRepository: BaseRepository {
 
 
 

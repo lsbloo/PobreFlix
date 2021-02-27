@@ -8,7 +8,7 @@ import app.student.movieapp.repository.MovieListRepositoryImpl
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-class MovieListModule {
+class HomeAppModule {
 
 
     companion object {
@@ -20,5 +20,10 @@ class MovieListModule {
                 MovieListPresenter(view, get(),get())
             }
         }
+
+      val searchMovieModule = module {
+
+
+      }
     }
 }
