@@ -1,0 +1,20 @@
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myapp="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:elevation="4dp"
+    android:background="@color/black"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    app:layout_scrollFlags="scroll|enterAlways"
+    app:ignore="NamespaceTypo" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="POBREFLIX"
+        android:textColor="@color/titleHome"
+        android:textSize="34sp"
+        android:id="@+id/toolbar_title" />
+
+</androidx.appcompat.widget.Toolbar>

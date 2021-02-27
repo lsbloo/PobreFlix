@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.MovieApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">true</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#FDFCFC</item>
+        <item name="colorPrimaryVariant">#0C061B</item>
+        <item name="colorOnPrimary">#232121</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">#EE0014</item>
+        <item name="colorSecondaryVariant">#0C061B</item>
+        <item name="colorOnSecondary">#232121</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>

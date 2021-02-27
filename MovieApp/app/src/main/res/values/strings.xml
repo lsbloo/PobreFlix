@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">PobreFlix</string>
+
+    <!-- FONTS -->
+    <string name="comic_sans">fonts/comic-sans-ms-4.ttf</string>
+
+    <!-- NETWORK DEFAULT MESSAGES-->
+    <string name="network_success_message">Request bem sucedida!</string>
+    <string name="network_success_operation_movie_list_popular">Lista de filmes populares</string>
+    <string name="network_success_operation_movie_list_tops">Lista de filmes Tops</string>
+
+
+</resources>
