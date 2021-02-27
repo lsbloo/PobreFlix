@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import app.student.movieapp.search.views.SearchMovieFragment
+import app.student.movieapp.home.views.fragments.SearchMovieFragment
 
 import app.student.movieapp.views.fragments.ListMoviesFragment
 import kotlinx.android.synthetic.main.bottom_navigation.bottomNavigationView

@@ -1,4 +1,4 @@
-package app.student.movieapp.search.views
+package app.student.movieapp.home.views.fragments
 
 import androidx.fragment.app.Fragment
 import app.student.movieapp.R
