@@ -1,13 +1,10 @@
 package app.student.movieapp.contract
 
 import androidx.recyclerview.widget.RecyclerView
-import app.student.movieapp.adapter.MovieAdapter
+import app.student.movieapp.core.BaseView
 import app.student.movieapp.core.BaseMonitor
 import app.student.movieapp.core.BaseMovieListerner
 import app.student.movieapp.core.BasePresenter
-import app.student.movieapp.core.model.NetworkError
-import app.student.movieapp.core.model.NetworkFailure
-import app.student.movieapp.core.model.NetworkSuccess
 import app.student.movieapp.model.Movie
 
 interface MovieListContract {
@@ -27,9 +24,7 @@ interface MovieListContract {
     }
 
     // View
-    interface View {
-        fun onMessageError(network: NetworkFailure)
-        fun onMessageError(t: Throwable)
+    interface View : BaseView {
         fun onShowListMoviesTop(moviesList: List<Movie>)
         fun onShowListMoviesPopular(moviesList: List<Movie>)
         fun onPrepareVisualizationTop(page: Int)

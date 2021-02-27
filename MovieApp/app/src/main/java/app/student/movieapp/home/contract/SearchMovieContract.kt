@@ -3,6 +3,7 @@ package app.student.movieapp.home.contract
 import app.student.movieapp.core.BaseMonitor
 import app.student.movieapp.core.BaseMovieListerner
 import app.student.movieapp.core.BasePresenter
+import app.student.movieapp.core.BaseView
 import app.student.movieapp.model.Movie
 
 interface SearchMovieContract {
@@ -20,7 +21,7 @@ interface SearchMovieContract {
         fun onPrepareMoviesView()
     }
     // View
-    interface View {
+    interface View : BaseView {
         fun onShowMoviesListSearched(movieList: List<Movie>)
     }
 
