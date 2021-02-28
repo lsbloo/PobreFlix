@@ -9,5 +9,6 @@ data class SearchedMovies(
     @PrimaryKey(autoGenerate = true)
     val id:Long = 0,
     val nameMovie: String,
+    val imgMovie: String,
     val date: String
 )

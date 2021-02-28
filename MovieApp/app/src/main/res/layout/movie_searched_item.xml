@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    android:background="@color/black"
+    android:id="@+id/constraintFather"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintRight_toRightOf="@id/constraintFather"
+        app:layout_constraintLeft_toLeftOf="@id/constraintFather"
+        app:layout_constraintTop_toTopOf="@id/constraintFather"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/relative"
+            android:orientation="horizontal"
+            android:background="@color/dark_black"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/frameImage"
+                android:orientation="vertical"
+                >
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/cardViewImageView"
+                    app:cardCornerRadius="14dp"
+                    >
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/imageMovieSearch"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorGrey"
+                            android:scaleType="centerCrop"
+                            tools:srcCompat="@tools:sample/avatars" />
+                        <ProgressBar
+                            android:id="@+id/progressBarSearch"
+                            style="?android:attr/progressBarStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_height="wrap_content" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="34dp"
+                    android:layout_marginLeft="12dp"
+                    android:text="DEATH NOTE"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:elevation="2dp"
+                    android:id="@+id/txt_name_movie"
+                    android:drawableEnd="@drawable/ic_baseline_play_circle_outline_24"
+                    android:drawableRight="@drawable/ic_baseline_play_circle_outline_24" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

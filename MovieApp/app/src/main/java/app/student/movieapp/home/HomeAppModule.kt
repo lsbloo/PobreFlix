@@ -42,7 +42,7 @@ class HomeAppModule {
             val database = Room.databaseBuilder(
                 context,
                 AppDatabase::class.java,
-                "pobreflixapp").build()
+                "pobreflixapp").allowMainThreadQueries().build()
 
             return database.searchedMoviesDAO()
         }

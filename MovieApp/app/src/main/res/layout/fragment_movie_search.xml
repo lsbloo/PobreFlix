@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text=" SÉRIES E FILMES"
+        tools:text=" SÉRIES E FILMES"
         android:textStyle="bold"
         android:textSize="18sp"
         android:textColor="@color/white"

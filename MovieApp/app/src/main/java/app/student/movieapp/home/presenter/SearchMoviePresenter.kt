@@ -2,12 +2,13 @@ package app.student.movieapp.home.presenter
 
 import app.student.movieapp.core.model.NetworkError
 import app.student.movieapp.core.model.NetworkFailure
-import app.student.movieapp.home.adapter.extensions.formatDateBr
+import app.student.movieapp.home.adapter.MovieSearchAdapter
+import app.student.movieapp.home.extensions.formatDateBr
 import app.student.movieapp.home.contract.SearchMovieContract
 import app.student.movieapp.home.monitoring.SearchMovieMonitoring
-import app.student.movieapp.home.repository.SearchMovieRepository
 import app.student.movieapp.home.repository.SearchMovieRepositoryImpl
 import app.student.movieapp.home.storage.entity.SearchedMovies
+import app.student.movieapp.home.views.fragments.SearchMovieFragment
 import app.student.movieapp.model.Movie
 import java.util.*
 import kotlin.reflect.KClass
@@ -24,6 +25,7 @@ class SearchMoviePresenter(private val view: SearchMovieContract.View, private v
     override fun listMoviesSearch(movieList: List<Movie>) {
 
         // ->> Falta implementar o Skeleton !
+        view.onSetTextApresentationFragment(SearchMovieFragment.SEARCH_TXT_VIEW)
         view.onShowMoviesListSearched(movieList)
     }
 
@@ -39,8 +41,8 @@ class SearchMoviePresenter(private val view: SearchMovieContract.View, private v
         onGetSearchMovie(name)
     }
 
-    override fun onAddSearchedRecentBackGround(name: String, date: Date) {
-        repository.addRecentSearchMoviesStorage(SearchedMovies(nameMovie = name,date = date.formatDateBr()))
+    override fun onAddSearchedRecentBackGround(name: String, imgUrl: String,date: Date) {
+        repository.addRecentSearchMoviesStorage(SearchedMovies(nameMovie = name,date = date.formatDateBr(), imgMovie = imgUrl))
     }
 
     // Implementar logica para remoção de mais antigos! Definir um time
@@ -48,8 +50,29 @@ class SearchMoviePresenter(private val view: SearchMovieContract.View, private v
 
     }
 
-    override fun onGetSearchedRecentBackGround() {
-        repository.getAllRecentSearchMoviesStorage()
+    override fun onGetSearchedRecentBackGround(): List<SearchedMovies> {
+        return repository.getAllRecentSearchMoviesStorage()
+    }
+
+    override fun onSaveSearchedMovie(name: String, adapter: MovieSearchAdapter) {
+        val dataset = adapter.getDataSet()
+        val movie = onSearchMovieDataSetAdapter(name,dataset)
+        if(movie!=null){
+            onAddSearchedRecentBackGround(movie.title,movie.backdrop_path,getDate())
+        }
+    }
+
+    override fun onSearchMovieDataSetAdapter(name: String, list: List<Movie>): Movie? {
+        val result = list.filter { movie -> movie.title.toLowerCase().contains(name) }
+            .let { t -> if (t.isNotEmpty()) {
+                    return t[0] }
+            }
+        return null
+    }
+
+    override fun onPrepareSearchedMoviesView() {
+        view.onSetTextApresentationFragment(SearchMovieFragment.SEARCHED_TXT_VIEW)
+        view.onShowSearchedMovies(onGetSearchedRecentBackGround())
     }
 
     override fun <T : Any> onResponseOnErrorNetwork(clazz: KClass<T>) {
