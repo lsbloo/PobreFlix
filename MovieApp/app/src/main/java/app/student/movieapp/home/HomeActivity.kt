@@ -6,13 +6,14 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import app.student.movieapp.core.BaseActivity
 import app.student.movieapp.home.views.fragments.SearchMovieFragment
 
 import app.student.movieapp.views.fragments.ListMoviesFragment
 import kotlinx.android.synthetic.main.bottom_navigation.bottomNavigationView
 import kotlinx.android.synthetic.main.home_activity.*
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
 
     private var toolbar: Toolbar?= null
 
@@ -20,9 +21,8 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
         toolbar = findViewById(R.id.toolbar)
+        fragmentCalled((ListMoviesFragment(this)),TAG_LIST_MOVIES_FRAGMENT)
         configureToolbar()
-        fragmentCalled((ListMoviesFragment(this)))
-        supportFragmentManager.beginTransaction()
     }
 
 
@@ -33,21 +33,29 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun fragmentCalled(fragment: Fragment): Boolean {
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragmentHome, fragment).commit()
+
+    override fun onBackPressed() {
+        if(listenerBackPressed!=null){
+            val fragment = listenerBackPressed!!.onBackPressed()
+            if(fragment.tag == TAG_SEARCH_MOVIES_FRAGMENT){
+                supportActionBar?.show()
+               bottomNavigationView.selectedItemId = R.id.home
+            }
+        }else{
+            super.onBackPressed()
         }
-        return true
+
     }
 
     override fun onResume() {
         super.onResume()
+        System.err.println("OnResume!!")
         bottomNavigationView.setOnNavigationItemSelectedListener{
             when(it.itemId){
-                R.id.home -> fragmentCalled((ListMoviesFragment(this@HomeActivity)))
                 R.id.seach -> {
+                    System.err.println("qokeqkoe")
                     supportActionBar?.hide()
-                    fragmentCalled(SearchMovieFragment())
+                    fragmentCalled(SearchMovieFragment(),TAG_SEARCH_MOVIES_FRAGMENT)
                 }
                 else -> it.hasSubMenu()
             }
@@ -60,6 +68,12 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_home,menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    companion object {
+         const val TAG_LIST_MOVIES_FRAGMENT="listmoviesfragment"
+         const val TAG_SEARCH_MOVIES_FRAGMENT="searchmoviesfragment"
+
     }
 
 }

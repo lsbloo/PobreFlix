@@ -1,13 +1,22 @@
 package app.student.movieapp.home.views.fragments
 
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import app.student.movieapp.HomeActivity
 import app.student.movieapp.R
+import app.student.movieapp.core.BaseActivity
 import app.student.movieapp.core.BaseFragment
+import app.student.movieapp.core.managerFragments.BaseBackPressedImpl
+import app.student.movieapp.core.managerFragments.BaseIOFragment
 import app.student.movieapp.core.model.NetworkFailure
 import app.student.movieapp.home.adapter.MovieSearchAdapter
 import app.student.movieapp.home.contract.SearchMovieContract
@@ -29,6 +38,18 @@ class SearchMovieFragment() : BaseFragment(R.layout.fragment_movie_search), Sear
 
     companion object {
         private const val QUANTITY_LINES_GRID_ = 3
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val act: BaseActivity = activity as HomeActivity
+        act.setOnBackPressedListener(BaseBackPressedImpl(activity as FragmentActivity,this))
+        return super.onCreateView(inflater, container, savedInstanceState)
+
+
     }
 
     override fun onShowMoviesListSearched(movieList: List<Movie>) {

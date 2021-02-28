@@ -2,6 +2,7 @@ package app.student.movieapp.views.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import app.student.movieapp.R
 import app.student.movieapp.adapter.MovieAdapter
 import app.student.movieapp.contract.MovieListContract
+import app.student.movieapp.core.BaseFragment
 import app.student.movieapp.core.MovieListResourceManager
 import app.student.movieapp.core.model.NetworkFailure
 import app.student.movieapp.model.Movie
@@ -22,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_movie_list.view.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class ListMoviesFragment(context: Context) : Fragment(R.layout.fragment_movie_list), MovieListContract.View {
+class ListMoviesFragment(context: Context) : BaseFragment(R.layout.fragment_movie_list), MovieListContract.View {
 
     private val presenter: MovieListPresenter by inject { parametersOf(this) }
     private val ctx: Context = context
@@ -104,11 +106,13 @@ class ListMoviesFragment(context: Context) : Fragment(R.layout.fragment_movie_li
 
     override fun onPause() {
         super.onPause()
+        Log.d("OnPause", "OnPause ListMovieFragment Called")
     }
 
     override fun onDestroy() {
         super.onDestroy()
         presenter.onDisposable()
+        Log.d("OnDestroy", "OnDestroyer ListMovieFragment Called")
     }
 
 
