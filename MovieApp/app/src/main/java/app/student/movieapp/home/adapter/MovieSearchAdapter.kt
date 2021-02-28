@@ -29,13 +29,10 @@ class MovieSearchAdapter(private val ctx: Context, private val dataSet: List<Mov
     }
 
     private fun bindDataSetHolder(holder: CustomViewHolder, position: Int) {
-
         holder.progressBar.visibility = View.GONE
         Glide.with(ctx)
             .load(BASE_URL_IMAGE + movieList[position].backdrop_path)
             .into(holder.imageView)
-
-
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {

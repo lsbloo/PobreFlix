@@ -22,6 +22,7 @@ class HomeActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         configureToolbar()
         fragmentCalled((ListMoviesFragment(this)))
+        supportFragmentManager.beginTransaction()
     }
 
 

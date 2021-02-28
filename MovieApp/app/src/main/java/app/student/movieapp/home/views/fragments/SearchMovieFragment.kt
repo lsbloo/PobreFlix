@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.student.movieapp.R
+import app.student.movieapp.core.BaseFragment
 import app.student.movieapp.core.model.NetworkFailure
 import app.student.movieapp.home.adapter.MovieSearchAdapter
 import app.student.movieapp.home.contract.SearchMovieContract
@@ -17,7 +18,7 @@ import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
 
-class SearchMovieFragment() : Fragment(R.layout.fragment_movie_search), SearchMovieContract.View {
+class SearchMovieFragment() : BaseFragment(R.layout.fragment_movie_search), SearchMovieContract.View {
 
     private val presenter: SearchMoviePresenter by inject { parametersOf(this) }
 
@@ -26,13 +27,15 @@ class SearchMovieFragment() : Fragment(R.layout.fragment_movie_search), SearchMo
         onActivateSearchListenerByQuery()
     }
 
-
+    companion object {
+        private const val QUANTITY_LINES_GRID_ = 3
+    }
 
     override fun onShowMoviesListSearched(movieList: List<Movie>) {
         recyclerViewSearch.apply {
             adapter = activity?.baseContext?.let { MovieSearchAdapter(it, movieList) }
             layoutManager =
-                GridLayoutManager(activity?.baseContext, 3)
+                GridLayoutManager(activity?.baseContext, QUANTITY_LINES_GRID_)
         }
     }
 
@@ -70,6 +73,7 @@ class SearchMovieFragment() : Fragment(R.layout.fragment_movie_search), SearchMo
             Toast.LENGTH_SHORT
         ).show()
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
