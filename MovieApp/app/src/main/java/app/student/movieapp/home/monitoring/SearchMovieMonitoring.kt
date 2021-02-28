@@ -6,7 +6,7 @@ import app.student.movieapp.core.model.NetworkFailure
 import app.student.movieapp.core.model.NetworkSuccess
 import app.student.movieapp.home.contract.SearchMovieContract
 
-class SearchMovieMonitoring (): SearchMovieContract.Monitor {
+class SearchMovieMonitoring(): SearchMovieContract.Monitor {
     override fun trackNetworkFailure(network: NetworkFailure) {
         Log.d("Network-Failure", "\n Message: "+ network.message + "\n Body: " + network.body + " \n Status_Code: " + network.status_cod)
     }

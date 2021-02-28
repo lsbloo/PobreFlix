@@ -11,7 +11,7 @@ class MoviesApplication: Application() {
         startKoin {
             printLogger()
             androidContext(this@MoviesApplication)
-            modules(HomeAppModule.movieListModule,HomeAppModule.searchMovieModule)
+            modules(listOf(HomeAppModule.movieListModule,HomeAppModule.searchMovieModule))
         }
     }
 

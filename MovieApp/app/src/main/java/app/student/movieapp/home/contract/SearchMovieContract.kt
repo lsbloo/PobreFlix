@@ -18,11 +18,12 @@ interface SearchMovieContract {
     // MoviePresenter
     interface SearchMoviePresenter : BasePresenter{
         fun onGetSearchMovie(name: String)
-        fun onPrepareMoviesView()
+        fun onPrepareMoviesView(name: String)
     }
     // View
     interface View : BaseView {
         fun onShowMoviesListSearched(movieList: List<Movie>)
+        fun onActivateSearchListenerByQuery()
     }
 
     // Monitor

@@ -10,4 +10,6 @@
     <string name="network_success_operation_movie_list_tops">Lista de filmes Tops</string>
 
 
+    <!-- HINTS -->
+    <string name="hint_search_movie">Busque por série,filme,etc.</string>
 </resources>

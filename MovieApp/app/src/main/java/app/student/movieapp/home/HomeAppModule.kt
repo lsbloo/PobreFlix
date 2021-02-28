@@ -17,23 +17,22 @@ class HomeAppModule {
 
 
     companion object {
-      val movieListModule = module {
+        val movieListModule = module {
 
             single { MovieListRepositoryImpl() }
             single { MovieListMonitoring() }
-            factory{ (view: MovieListContract.View) ->
-                MovieListPresenter(view, get(),get())
+            factory { (view: MovieListContract.View) ->
+                MovieListPresenter(view, get(), get())
             }
         }
 
-      val searchMovieModule = module {
-          single<SearchMovieContract.Monitor> { SearchMovieMonitoring() }
-          single<SearchMovieRepository> {SearchMovieRepositoryImpl()}
-          factory {
-              ( view: SearchMovieContract.View) ->
-              SearchMoviePresenter(get(),get(),get())
-          }
+        val searchMovieModule = module {
+            single { SearchMovieRepositoryImpl() }
+            single { SearchMovieMonitoring() }
+            factory { (view: SearchMovieContract.View) ->
+                SearchMoviePresenter(view, get(), get())
+            }
 
-      }
+        }
     }
 }

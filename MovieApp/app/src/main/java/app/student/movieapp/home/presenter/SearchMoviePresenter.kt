@@ -3,12 +3,13 @@ package app.student.movieapp.home.presenter
 import app.student.movieapp.core.model.NetworkError
 import app.student.movieapp.core.model.NetworkFailure
 import app.student.movieapp.home.contract.SearchMovieContract
+import app.student.movieapp.home.monitoring.SearchMovieMonitoring
 import app.student.movieapp.home.repository.SearchMovieRepository
+import app.student.movieapp.home.repository.SearchMovieRepositoryImpl
 import app.student.movieapp.model.Movie
 import kotlin.reflect.KClass
 
-class SearchMoviePresenter(private val view: SearchMovieContract.View,
-private val repository: SearchMovieRepository, private val monitor: SearchMovieContract.Monitor) : SearchMovieContract.SearchMoviePresenter
+class SearchMoviePresenter(private val view: SearchMovieContract.View, private val repository: SearchMovieRepositoryImpl, private val monitor: SearchMovieMonitoring) : SearchMovieContract.SearchMoviePresenter
 ,SearchMovieContract.MovieSearchListener{
 
     init {
@@ -17,6 +18,8 @@ private val repository: SearchMovieRepository, private val monitor: SearchMovieC
 
     override fun listMoviesSearch(movieList: List<Movie>) {
 
+        // ->>
+        view.onShowMoviesListSearched(movieList)
     }
 
     override fun detailMovieSearch(movie: Movie) {
@@ -27,8 +30,8 @@ private val repository: SearchMovieRepository, private val monitor: SearchMovieC
         repository.searchMovieByName(name,PAGE_INIT)
     }
 
-    override fun onPrepareMoviesView() {
-
+    override fun onPrepareMoviesView(name: String) {
+        onGetSearchMovie(name)
     }
 
     override fun <T : Any> onResponseOnErrorNetwork(clazz: KClass<T>) {

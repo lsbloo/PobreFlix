@@ -44,7 +44,10 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener{
             when(it.itemId){
                 R.id.home -> fragmentCalled((ListMoviesFragment(this@HomeActivity)))
-                R.id.seach -> fragmentCalled(SearchMovieFragment())
+                R.id.seach -> {
+                    supportActionBar?.hide()
+                    fragmentCalled(SearchMovieFragment())
+                }
                 else -> it.hasSubMenu()
             }
             true

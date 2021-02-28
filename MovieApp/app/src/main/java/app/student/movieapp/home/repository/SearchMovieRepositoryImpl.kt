@@ -33,7 +33,7 @@ class SearchMovieRepositoryImpl(): SearchMovieRepository {
     }
 
     override fun searchMovieByName(name: String, page: Int) {
-        retrofit.apiServiceMovie().getMoviesBySearch(ApiService.TOKEN_API,page)
+        retrofit.apiServiceMovie().getMoviesBySearchName(name,ApiService.TOKEN_API,page)
             .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
             .subscribe({ response -> response.body()?.listMovies?.let { listener?.listMoviesSearch(it)
                         if(!response.isSuccessful){listener?.onErrorSearch(NetworkFailure(response.message(),response.body().toString(), response.code())) }
