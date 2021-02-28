@@ -49,11 +49,9 @@ class HomeActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        System.err.println("OnResume!!")
         bottomNavigationView.setOnNavigationItemSelectedListener{
             when(it.itemId){
                 R.id.seach -> {
-                    System.err.println("qokeqkoe")
                     supportActionBar?.hide()
                     fragmentCalled(SearchMovieFragment(),TAG_SEARCH_MOVIES_FRAGMENT)
                 }
@@ -73,7 +71,6 @@ class HomeActivity : BaseActivity() {
     companion object {
          const val TAG_LIST_MOVIES_FRAGMENT="listmoviesfragment"
          const val TAG_SEARCH_MOVIES_FRAGMENT="searchmoviesfragment"
-
     }
 
 }

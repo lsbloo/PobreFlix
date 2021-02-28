@@ -7,4 +7,6 @@ interface SearchMovieRepository : BaseRepository{
     fun searchMovieByName(name: String, page: Int)
     fun getDetailsMovie(movie: Movie)
 
+
+
 }

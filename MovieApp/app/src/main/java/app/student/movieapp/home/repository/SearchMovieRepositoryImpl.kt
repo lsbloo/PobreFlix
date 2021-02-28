@@ -4,15 +4,17 @@ import app.student.movieapp.core.model.NetworkFailure
 import app.student.movieapp.core.network.ApiService
 import app.student.movieapp.core.network.RetrofitInitializer
 import app.student.movieapp.home.contract.SearchMovieContract
+import app.student.movieapp.home.storage.dao.SearchedMoviesDAO
 import app.student.movieapp.model.Movie
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class SearchMovieRepositoryImpl(): SearchMovieRepository {
+class SearchMovieRepositoryImpl(private val searchedMoviesDao: SearchedMoviesDAO): SearchMovieRepository {
     private val retrofit = RetrofitInitializer()
     private val disposable = CompositeDisposable()
     private var listener: SearchMovieContract.MovieSearchListener? =  null
+
 
     override fun getDetailsMovie(movie: Movie) {
         retrofit.apiServiceMovie().getDetaisMovie(ApiService.TOKEN_API,movie_id = movie.id)

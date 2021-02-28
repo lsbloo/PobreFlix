@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -14,7 +15,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -38,7 +39,12 @@ android {
 
 dependencies {
 
-
+    implementation "androidx.room:room-runtime:2.2.6"
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.2.6"
+    // optional - Test helpers
+    testImplementation "androidx.room:room-testing:2.2.6"
+    kapt "androidx.room:room-compiler:2.2.6"
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
