@@ -5,6 +5,7 @@ import app.student.movieapp.core.network.ApiService
 import app.student.movieapp.core.network.RetrofitInitializer
 import app.student.movieapp.home.contract.SearchMovieContract
 import app.student.movieapp.home.storage.dao.SearchedMoviesDAO
+import app.student.movieapp.home.storage.entity.SearchedMovies
 import app.student.movieapp.model.Movie
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -16,6 +17,21 @@ class SearchMovieRepositoryImpl(private val searchedMoviesDao: SearchedMoviesDAO
     private var listener: SearchMovieContract.MovieSearchListener? =  null
 
 
+    override fun addRecentSearchMoviesStorage(searchedMovies: SearchedMovies): Boolean {
+        searchedMoviesDao.add(searchedMovies)
+        return true
+    }
+
+    override fun getAllRecentSearchMoviesStorage(): List<SearchedMovies> {
+        return searchedMoviesDao.getAll()
+    }
+
+    override fun deleteRecentSearchMoviesStorage(searchedMovies: SearchedMovies): Boolean {
+        searchedMoviesDao.remove(searchedMovies)
+        return true
+    }
+
+
     override fun getDetailsMovie(movie: Movie) {
         retrofit.apiServiceMovie().getDetaisMovie(ApiService.TOKEN_API,movie_id = movie.id)
             .observeOn(AndroidSchedulers.mainThread())
@@ -25,6 +41,7 @@ class SearchMovieRepositoryImpl(private val searchedMoviesDao: SearchedMoviesDAO
                         }
             }},{t ->  listener?.onErrorSearch(t)})
     }
+
 
     override fun <T> attachListener(t: T) {
         listener = t as SearchMovieContract.MovieSearchListener

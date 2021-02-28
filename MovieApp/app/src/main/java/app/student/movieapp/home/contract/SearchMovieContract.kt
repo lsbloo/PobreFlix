@@ -5,6 +5,7 @@ import app.student.movieapp.core.BaseMovieListerner
 import app.student.movieapp.core.BasePresenter
 import app.student.movieapp.core.BaseView
 import app.student.movieapp.model.Movie
+import java.util.*
 
 interface SearchMovieContract {
 
@@ -19,6 +20,10 @@ interface SearchMovieContract {
     interface SearchMoviePresenter : BasePresenter{
         fun onGetSearchMovie(name: String)
         fun onPrepareMoviesView(name: String)
+        fun onAddSearchedRecentBackGround(name: String, date: Date)
+        fun onRemoveSearchRecentBackGround(name: String, date: Date)
+        fun onGetSearchedRecentBackGround()
+
     }
     // View
     interface View : BaseView {
