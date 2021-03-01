@@ -83,9 +83,7 @@ class SearchMovieFragment() : BaseFragment(R.layout.fragment_movie_search), Sear
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if(newText.isNullOrEmpty()){
-                   Toast.makeText(activity?.baseContext,"Pesquise por algum filme!", Toast.LENGTH_SHORT).show()
-                }else {
+                if(!newText.isNullOrEmpty()) {
                     presenter.onPrepareMoviesView(newText)
                 }
                 return true

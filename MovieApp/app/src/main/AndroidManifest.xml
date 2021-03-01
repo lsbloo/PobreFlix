@@ -13,7 +13,13 @@
         android:usesCleartextTraffic="true"
         android:name=".MoviesApplication"
         android:theme="@style/Theme.MovieApp">
-        <activity android:name=".HomeActivity">
+        <activity android:name=".HomeActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+
+        <activity android:name=".splash.SplashActivity"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

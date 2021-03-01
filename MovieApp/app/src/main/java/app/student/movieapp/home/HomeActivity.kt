@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import app.student.movieapp.core.BaseActivity
 import app.student.movieapp.home.views.fragments.SearchMovieFragment
+import app.student.movieapp.splash.SplashActivity
 
 import app.student.movieapp.views.fragments.ListMoviesFragment
 import kotlinx.android.synthetic.main.bottom_navigation.bottomNavigationView
@@ -20,6 +21,13 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
+
+        if(intent.hasExtra(SplashActivity.FLAG_HAS_SESSION)){
+            initComponents()
+        }
+        Thread.sleep(300)
+    }
+    private fun initComponents(){
         toolbar = findViewById(R.id.toolbar)
         fragmentCalled((ListMoviesFragment(this)),TAG_LIST_MOVIES_FRAGMENT)
         configureToolbar()
