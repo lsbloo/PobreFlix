@@ -18,9 +18,9 @@ import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheetDialog(movie: Movie,private val ctx: Context) : BottomSheetDialogFragment(){
+class BottomSheetDialog(movie: Movie, private val ctx: Context) : BottomSheetDialogFragment() {
 
-    private var bottomSheetPeekHeight: Int?=null
+    private var bottomSheetPeekHeight: Int? = null
     private val movieSelected = movie
 
 
@@ -31,10 +31,11 @@ class BottomSheetDialog(movie: Movie,private val ctx: Context) : BottomSheetDial
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_bottom_sheet_content,container,false)
+        val view = inflater.inflate(R.layout.fragment_bottom_sheet_content, container, false)
 
         val bottomSheet = view.findViewById<ConstraintLayout>(R.id.constraintFather)
-        bottomSheetPeekHeight = resources.getDimensionPixelSize(R.dimen.bottom_sheet_default_peek_height)
+        bottomSheetPeekHeight =
+            resources.getDimensionPixelSize(R.dimen.bottom_sheet_default_peek_height)
 
         val viewHolder = setUpHolder(view)
         setUpDataViewHolder(viewHolder)
@@ -42,18 +43,23 @@ class BottomSheetDialog(movie: Movie,private val ctx: Context) : BottomSheetDial
         return view
     }
 
-    private fun setUpDataViewHolder(holder: DataViewHolderDetailSearch){
+    private fun setUpDataViewHolder(holder: DataViewHolderDetailSearch) {
         holder.progressBar.visibility = View.GONE
         holder.title.text = movieSelected.title
         holder.overview.text = movieSelected.overview
-        holder.year.text = movieSelected.releaseDate
+        holder.year.text = getYearByReleaseData(movieSelected.releaseDate)
         Glide.with(ctx)
             .load(BASE_URL_IMAGE + movieSelected.backdrop_path)
             .into(holder.imageView)
 
-
+        holder.imageButtonClosed.setOnClickListener {
+            View.OnClickListener {
+                System.err.println("clicked!")
+            }
+        }
     }
-    private fun setUpHolder(view : View): DataViewHolderDetailSearch{
+
+    private fun setUpHolder(view: View): DataViewHolderDetailSearch {
         val imageView = view.findViewById<ImageView>(R.id.imageMovie)
         val textView_title: TextView = view.findViewById<TextView>(R.id.title_movie)
         val textView_year: TextView = view.findViewById<TextView>(R.id.txt_year_movie)
@@ -62,21 +68,45 @@ class BottomSheetDialog(movie: Movie,private val ctx: Context) : BottomSheetDial
         val buttonPlay: Button = view.findViewById<Button>(R.id.btn_play)
         val txtDownload: TextView = view.findViewById<TextView>(R.id.txt_download)
         val progressBar: ProgressBar = view.findViewById(R.id.progressBar)
-        return DataViewHolderDetailSearch(imageView,textView_title,textView_year,textView_overView,imageButton,buttonPlay,txtDownload,progressBar)
+
+        return DataViewHolderDetailSearch(
+            imageView,
+            textView_title,
+            textView_year,
+            textView_overView,
+            imageButton,
+            buttonPlay,
+            txtDownload,
+            progressBar
+        )
     }
+
     override fun onResume() {
         super.onResume()
         setUpBottomSheet()
     }
 
-    private fun setUpBottomSheet(){
+    private fun setUpBottomSheet() {
         val bottomSheetBehavior = BottomSheetBehavior.from(view?.parent as View)
         bottomSheetBehavior.peekHeight = bottomSheetPeekHeight!!
+    }
+
+    private fun getYearByReleaseData(data: String): String {
+        return data.split("-")[0]
     }
 
     companion object {
         private const val BASE_URL_IMAGE = "https://image.tmdb.org/t/p/w500"
     }
 }
-data class DataViewHolderDetailSearch(val imageView: ImageView,val title: TextView, val year: TextView, val overview: TextView,
-val imageButtonClosed: ImageView, val btn_play: Button, val txtDownload: TextView,val progressBar: ProgressBar)
+
+data class DataViewHolderDetailSearch(
+    val imageView: ImageView,
+    val title: TextView,
+    val year: TextView,
+    val overview: TextView,
+    val imageButtonClosed: ImageView,
+    val btn_play: Button,
+    val txtDownload: TextView,
+    val progressBar: ProgressBar
+)

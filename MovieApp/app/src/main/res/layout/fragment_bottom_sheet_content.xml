@@ -41,11 +41,11 @@
 
     <TextView
         android:id="@+id/title_movie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="195dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@id/frameLayoutImageView"
         app:layout_constraintTop_toTopOf="@id/constraintFather"
@@ -65,19 +65,28 @@
         android:id="@+id/txt_year_movie"
         />
 
-    <TextView
+    <ScrollView
         android:layout_width="200dp"
         android:layout_height="100dp"
         app:layout_constraintTop_toBottomOf="@id/txt_year_movie"
         app:layout_constraintLeft_toRightOf="@id/frameLayoutImageView"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        tools:text="Demons that once almost destroyed the world, are revived by someone. To prevent the world from being destroyed, the demon has to be sealed and the only one who can do it is the shrine maiden Shion from the country of demons, who has two powers; one is sealing demons and the other is predicting the deaths of humans. This time Naruto's mission is to guard Shion, but she predicts Naruto's death. The only way to escape it, is to get away from Shion, which would leave her unguarded, then the demon, whose only goal is to kill Shion will do so, thus meaning the end of the world. Naruto decides to challenge this"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/txt_overview"
+        app:layout_constraintBottom_toTopOf="@id/btn_play"
         android:layout_marginTop="8dp"
-        />
+        android:layout_marginBottom="6dp"
+
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            tools:text="Demons that once almost destroyed the world, are revived by someone. To prevent the world from being destroyed, the demon has to be sealed and the only one who can do it is the shrine maiden Shion from the country of demons, who has two powers; one is sealing demons and the other is predicting the deaths of humans. This time Naruto's mission is to guard Shion, but she predicts Naruto's death. The only way to escape it, is to get away from Shion, which would leave her unguarded, then the demon, whose only goal is to kill Shion will do so, thus meaning the end of the world. Naruto decides to challenge this"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/txt_overview"
+            />
+
+    </ScrollView>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -97,25 +106,23 @@
         app:layout_constraintLeft_toLeftOf="@id/constraintFather"
         android:text="Assistir"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:drawableLeft="@drawable/ic_baseline_play_arrow_24"
         android:id="@+id/btn_play"
         >
     </Button>
 
     <TextView
+        android:id="@+id/txt_download"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/frameLayoutImageView"
-        app:layout_constraintLeft_toRightOf="@id/btn_play"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="32dp"
         android:drawableTop="@drawable/ic_baseline_arrow_downward_24"
         android:text="Baixar"
-        android:layout_marginTop="14dp"
-        android:layout_marginBottom="14dp"
-        android:layout_marginLeft="120dp"
         android:textColor="@color/white"
-        android:id="@+id/txt_download"
-        />
+        app:layout_constraintLeft_toRightOf="@id/btn_play"
+        app:layout_constraintTop_toBottomOf="@id/frameLayoutImageView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
