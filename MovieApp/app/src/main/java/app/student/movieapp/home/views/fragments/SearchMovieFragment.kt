@@ -28,6 +28,7 @@ import app.student.movieapp.home.adapter.listeners.SearchMovieListenerClickAdapt
 import app.student.movieapp.home.contract.SearchMovieContract
 import app.student.movieapp.home.presenter.SearchMoviePresenter
 import app.student.movieapp.home.storage.entity.SearchedMovies
+import app.student.movieapp.home.views.dialogs.BottomSheetDialog
 import app.student.movieapp.model.Movie
 import kotlinx.android.synthetic.main.fragment_movie_search.*
 import org.koin.android.ext.android.inject
@@ -109,7 +110,8 @@ class SearchMovieFragment() : BaseFragment(R.layout.fragment_movie_search), Sear
                 recyclerViewSearch,
                 object : RecyclerItemClickListener.OnItemClickListener {
                     override fun onItemClick(view: View, position: Int) {
-                        System.err.println("clicked!${position}")
+                        System.err.println("click ${position}")
+                        BottomSheetDialog()
                     }
 
                 })
