@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.home_activity.*
 class HomeActivity : BaseActivity() {
 
     private var toolbar: Toolbar?= null
+    private var currentInstanceFragment: Fragment?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +30,7 @@ class HomeActivity : BaseActivity() {
     }
     private fun initComponents(){
         toolbar = findViewById(R.id.toolbar)
-        fragmentCalled((ListMoviesFragment(this)),TAG_LIST_MOVIES_FRAGMENT)
+        currentInstanceFragment = fragmentCalled((ListMoviesFragment(this)),TAG_LIST_MOVIES_FRAGMENT)
         configureToolbar()
     }
 
@@ -49,19 +50,28 @@ class HomeActivity : BaseActivity() {
                 supportActionBar?.show()
                bottomNavigationView.selectedItemId = R.id.home
             }
+            COUNTER_EXIT_THIS_ACTIVITY+=1
+            exitApp()
         }else{
+            currentInstanceFragment?.activity!!.finish()
             super.onBackPressed()
+
         }
 
     }
 
+    private fun exitApp(){
+        if(COUNTER_EXIT_THIS_ACTIVITY>=2){
+            finish()
+        }
+    }
     override fun onResume() {
         super.onResume()
         bottomNavigationView.setOnNavigationItemSelectedListener{
             when(it.itemId){
                 R.id.seach -> {
                     supportActionBar?.hide()
-                    fragmentCalled(SearchMovieFragment(),TAG_SEARCH_MOVIES_FRAGMENT)
+                    currentInstanceFragment = fragmentCalled(SearchMovieFragment(),TAG_SEARCH_MOVIES_FRAGMENT)
                 }
                 else -> it.hasSubMenu()
             }
@@ -79,6 +89,7 @@ class HomeActivity : BaseActivity() {
     companion object {
          const val TAG_LIST_MOVIES_FRAGMENT="listmoviesfragment"
          const val TAG_SEARCH_MOVIES_FRAGMENT="searchmoviesfragment"
+         private var COUNTER_EXIT_THIS_ACTIVITY=0
     }
 
 }

@@ -23,6 +23,7 @@ class SplashActivity : BaseActivity(){
         Handler().postDelayed({
             startActivity(Intent(this@SplashActivity, HomeActivity::class.java)
                 .apply { putExtra(FLAG_HAS_SESSION, true) })
+            finish()
         }, INIT_HOME_ACTIVITY_TIME)
     }
 

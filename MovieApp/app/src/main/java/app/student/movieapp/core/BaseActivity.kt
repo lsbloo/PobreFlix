@@ -19,11 +19,11 @@ open class BaseActivity: AppCompatActivity() {
 
     fun getBaseFragmentManager() = fragmentManager
 
-     fun fragmentCalled(fragment: Fragment, tag: String): Boolean {
+     fun fragmentCalled(fragment: Fragment, tag: String): Fragment {
         getBaseFragmentManager().beginTransaction().apply {
             add(R.id.fragmentHome, fragment, tag).commit()
             addToBackStack(null)
         }
-        return true
+        return fragment
     }
 }
