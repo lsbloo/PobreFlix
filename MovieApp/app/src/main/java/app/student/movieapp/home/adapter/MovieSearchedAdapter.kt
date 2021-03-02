@@ -41,8 +41,10 @@ class MovieSearchedAdapter(private val ctx: Context, private val searchList: Lis
 
 class DataViewHolderSearched(itemView: View) : CustomViewHolderSearched(itemView)
 
+
 open class CustomViewHolderSearched(itemView: View): RecyclerView.ViewHolder(itemView){
     val textView: TextView = itemView.findViewById<TextView>(R.id.txt_name_movie)
     val imageView: ImageView = itemView.findViewById<ImageView>(R.id.imageMovieSearch)
     val progressBar: ProgressBar = itemView.findViewById<ProgressBar>(R.id.progressBarSearch)
+
 }

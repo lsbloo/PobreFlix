@@ -42,9 +42,7 @@ class SearchMoviePresenter(private val view: SearchMovieContract.View, private v
     }
 
     override fun onAddSearchedRecentBackGround(name: String, imgUrl: String,date: Date) {
-        System.err.println("inserted called")
-        val re = repository.addRecentSearchMoviesStorage(SearchedMovies(nameMovie = name,date = date.formatDateBr(), imgMovie = imgUrl))
-        System.err.println("inserted $re")
+      repository.addRecentSearchMoviesStorage(SearchedMovies(nameMovie = name,date = date.formatDateBr(), imgMovie = imgUrl))
     }
 
     // Implementar logica para remoção de mais antigos! Definir um time

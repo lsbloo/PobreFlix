@@ -3,6 +3,7 @@ package app.student.movieapp.home.views.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import app.student.movieapp.HomeActivity
 import app.student.movieapp.R
 import app.student.movieapp.core.BaseActivity
@@ -21,6 +23,8 @@ import app.student.movieapp.core.managerFragments.BaseIOFragment
 import app.student.movieapp.core.model.NetworkFailure
 import app.student.movieapp.home.adapter.MovieSearchAdapter
 import app.student.movieapp.home.adapter.MovieSearchedAdapter
+import app.student.movieapp.home.adapter.listeners.RecyclerItemClickListener
+import app.student.movieapp.home.adapter.listeners.SearchMovieListenerClickAdapter
 import app.student.movieapp.home.contract.SearchMovieContract
 import app.student.movieapp.home.presenter.SearchMoviePresenter
 import app.student.movieapp.home.storage.entity.SearchedMovies
@@ -62,9 +66,11 @@ class SearchMovieFragment() : BaseFragment(R.layout.fragment_movie_search), Sear
             adapter = activity?.baseContext?.let { MovieSearchAdapter(it, movieList) }
             layoutManager =
                 GridLayoutManager(activity?.baseContext, QUANTITY_LINES_GRID_)
-            thisadapter =  MovieSearchAdapter(activity?.baseContext!!, movieList)
+            thisadapter = adapter as MovieSearchAdapter
         }
+        onListenerClickRecyclerViewSearchMovie()
     }
+
 
     override fun onShowSearchedMovies(movieList: List<SearchedMovies>) {
         recyclerViewSearch.apply {
@@ -95,6 +101,21 @@ class SearchMovieFragment() : BaseFragment(R.layout.fragment_movie_search), Sear
     override fun onSetTextApresentationFragment(text: String) {
         txtMovies.text = text
     }
+
+    override fun onListenerClickRecyclerViewSearchMovie() {
+        recyclerViewSearch.addOnItemTouchListener(
+            RecyclerItemClickListener(
+                activity?.baseContext!!,
+                recyclerViewSearch,
+                object : RecyclerItemClickListener.OnItemClickListener {
+                    override fun onItemClick(view: View, position: Int) {
+                        System.err.println("clicked!${position}")
+                    }
+
+                })
+        )
+    }
+
 
     override fun onMessageError(network: NetworkFailure) {
         Toast.makeText(

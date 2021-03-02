@@ -35,8 +35,8 @@ interface SearchMovieContract {
         fun onShowMoviesListSearched(movieList: List<Movie>)
         fun onShowSearchedMovies(movieList: List<SearchedMovies>)
         fun onActivateSearchListenerByQuery()
-
         fun onSetTextApresentationFragment(text: String)
+        fun onListenerClickRecyclerViewSearchMovie()
     }
 
     // Monitor
