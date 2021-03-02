@@ -7,6 +7,7 @@ import android.view.Menu
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import app.student.movieapp.core.BaseActivity
+import app.student.movieapp.home.ManagerScreenHomeActivity
 import app.student.movieapp.home.views.fragments.SearchMovieFragment
 import app.student.movieapp.splash.SplashActivity
 
@@ -16,44 +17,52 @@ import kotlinx.android.synthetic.main.home_activity.*
 
 class HomeActivity : BaseActivity() {
 
-    private var toolbar: Toolbar?= null
-    private var currentInstanceFragment: Fragment?=null
+    private var toolbar: Toolbar? = null
+    private var currentInstanceFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
 
-        if(intent.hasExtra(SplashActivity.FLAG_HAS_SESSION)){
+        if (intent.hasExtra(SplashActivity.FLAG_HAS_SESSION)) {
             initComponents()
         }
         Thread.sleep(300)
     }
-    private fun initComponents(){
+
+    private fun initComponents() {
         toolbar = findViewById(R.id.toolbar)
-        currentInstanceFragment = fragmentCalled((ListMoviesFragment(this)),TAG_LIST_MOVIES_FRAGMENT)
+        currentInstanceFragment =
+            fragmentCalled((ListMoviesFragment(this)), TAG_LIST_MOVIES_FRAGMENT)
         configureToolbar()
     }
 
 
-    private fun configureToolbar(){
-        toolbar_title.typeface = Typeface.createFromAsset(assets, resources.getString(R.string.comic_sans))
-        toolbar?.logo
-        setSupportActionBar(toolbar)
+    private fun configureToolbar() {
+        val toolbarx = ManagerScreenHomeActivity.changeLenghtTitleToolbarByScreenDevice(
+            windowManager.defaultDisplay.height,
+            windowManager.defaultDisplay.width,
+            toolbar_title,
+            assets,
+            resources,
+            toolbar
+        )
+        setSupportActionBar(toolbarx)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
 
     override fun onBackPressed() {
-        if(listenerBackPressed!=null){
+        if (listenerBackPressed != null) {
             val fragment = listenerBackPressed!!.onBackPressed()
-            if(fragment.tag == TAG_SEARCH_MOVIES_FRAGMENT){
+            if (fragment.tag == TAG_SEARCH_MOVIES_FRAGMENT) {
                 supportActionBar?.show()
-               bottomNavigationView.selectedItemId = R.id.home
-            }else {
+                bottomNavigationView.selectedItemId = R.id.home
+            } else {
                 COUNTER_EXIT_THIS_ACTIVITY += 1
                 exitApp()
             }
-        }else{
+        } else {
             currentInstanceFragment?.activity!!.finish()
             super.onBackPressed()
 
@@ -61,18 +70,20 @@ class HomeActivity : BaseActivity() {
 
     }
 
-    private fun exitApp(){
-        if(COUNTER_EXIT_THIS_ACTIVITY>=2){
+    private fun exitApp() {
+        if (COUNTER_EXIT_THIS_ACTIVITY >= 2) {
             finish()
         }
     }
+
     override fun onResume() {
         super.onResume()
-        bottomNavigationView.setOnNavigationItemSelectedListener{
-            when(it.itemId){
+        bottomNavigationView.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
                 R.id.seach -> {
                     supportActionBar?.hide()
-                    currentInstanceFragment = fragmentCalled(SearchMovieFragment(),TAG_SEARCH_MOVIES_FRAGMENT)
+                    currentInstanceFragment =
+                        fragmentCalled(SearchMovieFragment(), TAG_SEARCH_MOVIES_FRAGMENT)
                 }
                 else -> it.hasSubMenu()
             }
@@ -81,16 +92,15 @@ class HomeActivity : BaseActivity() {
     }
 
 
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_home,menu)
+        menuInflater.inflate(R.menu.menu_home, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     companion object {
-         const val TAG_LIST_MOVIES_FRAGMENT="listmoviesfragment"
-         const val TAG_SEARCH_MOVIES_FRAGMENT="searchmoviesfragment"
-         private var COUNTER_EXIT_THIS_ACTIVITY=0
+        const val TAG_LIST_MOVIES_FRAGMENT = "listmoviesfragment"
+        const val TAG_SEARCH_MOVIES_FRAGMENT = "searchmoviesfragment"
+        private var COUNTER_EXIT_THIS_ACTIVITY = 0
     }
 
 }
