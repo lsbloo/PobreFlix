@@ -35,10 +35,13 @@ import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
 
-class SearchMovieFragment() : BaseFragment(R.layout.fragment_movie_search), SearchMovieContract.View {
+class SearchMovieFragment(layoutBottomSheet: Int) : BaseFragment(R.layout.fragment_movie_search), SearchMovieContract.View {
 
     private val presenter: SearchMoviePresenter by inject { parametersOf(this) }
     private var thisadapter: MovieSearchAdapter? = null
+    private val layoutBottomSheet = layoutBottomSheet
+    private var queryx: String?=null
+
     override fun onResume() {
         super.onResume()
         onActivateSearchListenerByQuery()
@@ -85,7 +88,6 @@ class SearchMovieFragment() : BaseFragment(R.layout.fragment_movie_search), Sear
         searchMovie.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                thisadapter?.let { presenter.onSaveSearchedMovie(query!!, it) }
                 return true
             }
 
@@ -106,12 +108,11 @@ class SearchMovieFragment() : BaseFragment(R.layout.fragment_movie_search), Sear
     override fun onListenerClickRecyclerViewSearchMovie() {
         recyclerViewSearch.addOnItemTouchListener(
             RecyclerItemClickListener(
-                activity?.baseContext!!,
-                recyclerViewSearch,
                 object : RecyclerItemClickListener.OnItemClickListener {
                     override fun onItemClick(view: View, position: Int) {
                         System.err.println("click $position")
-                        thisadapter?.getMovieAtPosition(position)?.let { BottomSheetDialog(it,activity?.baseContext!!).show(fragmentManager!!,"bottom_sheet_dialog") }
+                       thisadapter?.let { presenter.onSaveSearchedMovie(it.getMovieAtPosition(position).title, it) }
+                       thisadapter?.getMovieAtPosition(position)?.let { BottomSheetDialog(it,activity?.baseContext!!,layoutBottomSheet).show(fragmentManager!!,"bottom_sheet_dialog") }
                     }
 
                 })

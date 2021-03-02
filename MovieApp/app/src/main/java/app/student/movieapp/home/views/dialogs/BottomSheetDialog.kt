@@ -18,11 +18,11 @@ import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheetDialog(movie: Movie, private val ctx: Context) : BottomSheetDialogFragment() {
+class BottomSheetDialog(movie: Movie, private val ctx: Context,layoutBottomSheet: Int) : BottomSheetDialogFragment() {
 
     private var bottomSheetPeekHeight: Int? = null
     private val movieSelected = movie
-
+    private val layoutBottomSheet = layoutBottomSheet
 
     override fun getTheme() = R.style.Theme_MaterialComponents_Light_BottomSheetDialog
 
@@ -31,7 +31,8 @@ class BottomSheetDialog(movie: Movie, private val ctx: Context) : BottomSheetDia
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_bottom_sheet_content, container, false)
+
+        val view = inflater.inflate(layoutBottomSheet, container, false)
 
         val bottomSheet = view.findViewById<ConstraintLayout>(R.id.constraintFather)
         bottomSheetPeekHeight =

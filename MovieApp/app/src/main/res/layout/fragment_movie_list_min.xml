@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="@id/recyclerViewTop"
-                app:layout_constraintGuide_begin="274dp" />
+                app:layout_constraintGuide_begin="229dp" />
 
             <TextView
                 android:id="@+id/txt_popular_movies"
@@ -134,6 +134,7 @@
         android:background="@color/black"
         >
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/black"

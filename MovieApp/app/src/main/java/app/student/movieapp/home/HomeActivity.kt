@@ -86,7 +86,11 @@ class HomeActivity : BaseActivity() {
                 R.id.seach -> {
                     supportActionBar?.hide()
                     currentInstanceFragment =
-                        fragmentCalled(SearchMovieFragment(), TAG_SEARCH_MOVIES_FRAGMENT)
+                        ManagerScreenHomeActivity.changeBottomSheetDialogDetailMovie(
+                            getHeightScreen(),
+                            getWidthScreen(),
+                            this
+                        )
                 }
                 else -> it.hasSubMenu()
             }

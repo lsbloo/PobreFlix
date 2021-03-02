@@ -63,7 +63,7 @@ class SearchMoviePresenter(private val view: SearchMovieContract.View, private v
     }
 
     override fun onSearchMovieDataSetAdapter(name: String, list: List<Movie>): Movie? {
-        val result = list.filter { movie -> movie.title.toLowerCase().contains(name) }
+         list.filter { movie -> movie.title.toLowerCase().contains(name) }
             .let { t -> if (t.isNotEmpty()) {
                     return t[0] }
             }

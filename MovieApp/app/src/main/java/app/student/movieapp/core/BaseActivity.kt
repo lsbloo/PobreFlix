@@ -28,6 +28,8 @@ open class BaseActivity: AppCompatActivity() {
     }
 
     fun getWidthScreen() = windowManager.defaultDisplay.width
+
+
     fun getHeightScreen() =  windowManager.defaultDisplay.height
 
 
