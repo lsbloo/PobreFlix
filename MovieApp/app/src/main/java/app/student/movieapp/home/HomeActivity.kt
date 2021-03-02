@@ -49,9 +49,10 @@ class HomeActivity : BaseActivity() {
             if(fragment.tag == TAG_SEARCH_MOVIES_FRAGMENT){
                 supportActionBar?.show()
                bottomNavigationView.selectedItemId = R.id.home
+            }else {
+                COUNTER_EXIT_THIS_ACTIVITY += 1
+                exitApp()
             }
-            COUNTER_EXIT_THIS_ACTIVITY+=1
-            exitApp()
         }else{
             currentInstanceFragment?.activity!!.finish()
             super.onBackPressed()
