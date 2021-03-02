@@ -87,6 +87,7 @@
         app:layout_constraintLeft_toRightOf="@id/frameLayoutImageView"
         app:layout_constraintTop_toTopOf="@id/constraintFather"
         android:layout_marginTop="12dp"
+        android:id="@+id/img_closed"
         />
 
     <Button
@@ -113,6 +114,7 @@
         android:layout_marginBottom="14dp"
         android:layout_marginLeft="120dp"
         android:textColor="@color/white"
+        android:id="@+id/txt_download"
         />
 
 

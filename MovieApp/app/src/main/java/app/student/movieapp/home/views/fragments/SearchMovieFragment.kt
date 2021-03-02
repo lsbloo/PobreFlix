@@ -110,8 +110,8 @@ class SearchMovieFragment() : BaseFragment(R.layout.fragment_movie_search), Sear
                 recyclerViewSearch,
                 object : RecyclerItemClickListener.OnItemClickListener {
                     override fun onItemClick(view: View, position: Int) {
-                        System.err.println("click ${position}")
-                        BottomSheetDialog()
+                        System.err.println("click $position")
+                        thisadapter?.getMovieAtPosition(position)?.let { BottomSheetDialog(it,activity?.baseContext!!).show(fragmentManager!!,"bottom_sheet_dialog") }
                     }
 
                 })
