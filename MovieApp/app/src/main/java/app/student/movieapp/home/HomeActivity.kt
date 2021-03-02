@@ -32,16 +32,19 @@ class HomeActivity : BaseActivity() {
 
     private fun initComponents() {
         toolbar = findViewById(R.id.toolbar)
-        currentInstanceFragment =
-            fragmentCalled((ListMoviesFragment(this)), TAG_LIST_MOVIES_FRAGMENT)
+        currentInstanceFragment = ManagerScreenHomeActivity.changeLayoutListMoviesByScreenDevice(
+            getHeightScreen(),
+            getWidthScreen(),
+            this
+        )
         configureToolbar()
     }
 
 
     private fun configureToolbar() {
         val toolbarx = ManagerScreenHomeActivity.changeLenghtTitleToolbarByScreenDevice(
-            windowManager.defaultDisplay.height,
-            windowManager.defaultDisplay.width,
+            getHeightScreen(),
+            getWidthScreen(),
             toolbar_title,
             assets,
             resources,

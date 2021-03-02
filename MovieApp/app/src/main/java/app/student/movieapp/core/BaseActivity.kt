@@ -26,4 +26,9 @@ open class BaseActivity: AppCompatActivity() {
         }
         return fragment
     }
+
+    fun getWidthScreen() = windowManager.defaultDisplay.width
+    fun getHeightScreen() =  windowManager.defaultDisplay.height
+
+
 }

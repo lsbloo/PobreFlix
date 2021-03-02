@@ -24,10 +24,11 @@ import kotlinx.android.synthetic.main.fragment_movie_list.view.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class ListMoviesFragment(context: Context) : BaseFragment(R.layout.fragment_movie_list), MovieListContract.View {
+class ListMoviesFragment(context: Context, layout: Int, layoutAdapter: Int) : BaseFragment(layout), MovieListContract.View {
 
     private val presenter: MovieListPresenter by inject { parametersOf(this) }
     private val ctx: Context = context
+    private val layoutAdapterx = layoutAdapter
 
     companion object {
         private const val PAGE_INIT_ = 1
@@ -54,7 +55,7 @@ class ListMoviesFragment(context: Context) : BaseFragment(R.layout.fragment_movi
     override fun onShowListMoviesTop(moviesList: List<Movie>) {
         stopSkeletonMoviesTop()
         recyclerViewTop.apply {
-            adapter = MovieAdapter(moviesList, ctx,presenter,recyclerViewTop)
+            adapter = MovieAdapter(moviesList, ctx,presenter,recyclerViewTop,layoutAdapterx)
             layoutManager = LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false)
 
         }
@@ -63,7 +64,7 @@ class ListMoviesFragment(context: Context) : BaseFragment(R.layout.fragment_movi
     override fun onShowListMoviesPopular(moviesList: List<Movie>) {
         stopSkeletonMoviesPopular()
         recyclerViewPopular.apply {
-            adapter = MovieAdapter(moviesList, ctx, presenter,recyclerViewPopular)
+            adapter = MovieAdapter(moviesList, ctx, presenter,recyclerViewPopular,layoutAdapterx)
             layoutManager = LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false)
         }
     }

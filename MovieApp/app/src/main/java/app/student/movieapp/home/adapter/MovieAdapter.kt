@@ -15,7 +15,7 @@ import app.student.movieapp.model.Movie
 import com.bumptech.glide.Glide
 
 class MovieAdapter(dataSet: List<Movie>, private val ctx: Context, private val listenerScrolled: MovieListContract.onScrolledAdapterListener
-,private val recyclerView: RecyclerView) : RecyclerView.Adapter<CustomViewHolder>() {
+,private val recyclerView: RecyclerView,private val laoyoutScreenAdapter: Int) : RecyclerView.Adapter<CustomViewHolder>() {
     private val movieList = dataSet
     private var isScrolled = false
 
@@ -23,7 +23,7 @@ class MovieAdapter(dataSet: List<Movie>, private val ctx: Context, private val l
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         if(viewType == VIEW_TYPE_ITEM) {
             val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.movie_item, parent, false)
+                    .inflate(laoyoutScreenAdapter, parent, false)
             return DataViewHolder(view)
         }
         val view = LayoutInflater.from(parent.context)
